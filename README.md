@@ -19,3 +19,9 @@ This project aims to achieve all that. From starter tools to a production-ready 
 ### Branches:
 
 * [1-Starter-API](https://github.com/Leka-Workshop/Express-APIvantage/tree/1-Starter-API)
+* [2-API-Validations](https://github.com/Leka-Workshop/Express-APIvantage/tree/2-API-Validations)
+
+### Blogs:
+* [How to set up starter project](https://mirzaleka.medium.com/express-js-starter-api-with-typescript-deef5c4b6b70)
+* [How to validate APIs](https://mirzaleka.medium.com/api-validations-in-express-js-5d1d308dceea)
+
