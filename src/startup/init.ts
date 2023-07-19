@@ -11,7 +11,7 @@ const appSetup = async (app: Express) => {
     ]);
 
     console.log('Databases connected successfully!');
-    const APP_PORT = Number(process.env.APP_PORT) || 3000;
+    const APP_PORT = Number(process.env.PORT) || 3000;
 
     app.listen(APP_PORT, () => {
       console.log(`Server started on port ${APP_PORT}`);
