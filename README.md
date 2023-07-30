@@ -18,4 +18,11 @@ Express.js starter app with TypeScript, SQL and MongoDB.
 * Node.js: v16.20.0
 * NPM: v8.19.4
 
-Read Full Blog on [Medium](https://mirzaleka.medium.com/express-js-starter-api-with-typescript-deef5c4b6b70)
+### Branches:
+
+* [1-Starter-API](https://github.com/Leka-Workshop/Express-APIvantage/tree/1-Starter-API)
+* [2-API-Validations](https://github.com/Leka-Workshop/Express-APIvantage/tree/2-API-Validations)
+
+### Blogs:
+* [How to set up starter project](https://mirzaleka.medium.com/express-js-starter-api-with-typescript-deef5c4b6b70)
+* [How to validate APIs](https://mirzaleka.medium.com/api-validations-in-express-js-5d1d308dceea)
