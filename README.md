@@ -15,8 +15,8 @@ Express.js starter app with TypeScript, SQL and MongoDB.
 * Have fun!
 
 **Built with:**
-* Node.js: v16.20.0
-* NPM: v8.19.4
+* Node.js: v18.2.0
+* NPM: v8.6.0
 
 ### Branches:
 
