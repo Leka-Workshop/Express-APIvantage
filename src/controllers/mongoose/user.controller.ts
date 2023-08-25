@@ -20,7 +20,12 @@ controller
       newUser.password = req.body.password;
 
       await newUser.save();
-    } catch(e: unknown) {
+    } catch(e: any) {
+
+      // If unique mongoose constraint (for username or email) is violated
+      if (e.name === 'MongoServerError' && e.code === 11000) {
+        return res.status(422).send({ message: 'User already exists!' });
+      }
       res.status(500).send({ message: 'Unable to save entry to DB!' })
     }
   })
