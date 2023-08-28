@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { IUser } from '../../databases/mongodb/model/user.model';
 import UserModel from '../../databases/mongodb/schema/user.schema';
+import { ErrorMessages } from '../../shared/enums/messages/error-messages.enum';
 import {
   changePasswordValidator,
   createUserValidator,
@@ -26,15 +27,17 @@ controller
       if (e.name === 'MongoServerError' && e.code === 11000) {
         return res.status(422).send({ message: 'User already exists!' });
       }
-      res.status(500).send({ message: 'Unable to save entry to DB!' })
+      res.status(500).send({ message: ErrorMessages.CreateFail })
     }
   })
 
   .get('/', async (req: Request, res: Response) => {
     try {
       const users = await UserModel.find({});
+      // httpLogger.info('Gonna send data!', { data: users })
       res.send(users);
     } catch(e: unknown) {
+      // httpLogger.error('Something went wrong');
       res.status(500).send({ message: 'Unable to retrieve data from DB!' })
     }
   })
@@ -52,7 +55,6 @@ controller
       }
 
       res.send(existingUser);
-
     } catch(e: unknown) {
       res.status(500).send({ message: 'Unable to retrieve data from DB!' })
     }

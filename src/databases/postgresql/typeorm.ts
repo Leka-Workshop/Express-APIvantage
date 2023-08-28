@@ -12,6 +12,7 @@ export default async function typeORMConnect(): Promise<void> {
       `${__dirname}/entity/*.entity.ts`
     ],
     synchronize: true,
+    // logging: true // <--- Enables debug logs
   });
 
   typeORMDB = await dataSource.initialize();
