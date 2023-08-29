@@ -9,17 +9,15 @@ const formatHTTPLoggerResponse = (
   req: Request,
   res: Response,
   responseBody: any,
-  exception?: IHTTPError
+  exception?: IHTTPError | null,
+  requestStartTime?: number
 ): IHTTPLoggerResponseData => {
-  const responseTimeInMS = '.';
+  let responseTimeInMS = '.';
 
-  // if (req.requestStartTime) {
-  //   console.log('req.requestStartTime :>> ', req.requestStartTime);
-  //   const endTime = Date.now() - req.requestStartTime;
-  //   responseTimeInMS = `${endTime / 1000}s`; // ms to s
-  // }
-
-  // console.log('responseBody :>> ', responseBody);
+  if (requestStartTime) {
+    const endTime = Date.now() - requestStartTime;
+    responseTimeInMS = `${endTime / 1000}s`; // ms to s
+  }
 
   return {
     request: {
@@ -36,6 +34,7 @@ const formatHTTPLoggerResponse = (
     },
     response: {
       headers: res.getHeaders(),
+      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
       statusCode: exception?.statusCode || res.statusCode,
       responseTime: responseTimeInMS,
       body: redactLogData(responseBody),

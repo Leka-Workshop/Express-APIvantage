@@ -1,7 +1,13 @@
 import { Router, Request, Response } from 'express';
 import { useTypeORM } from '../../databases/postgresql/typeorm';
 import { ProductEntity } from '../../databases/postgresql/entity/product.entity';
-import { createProductValidator, getProductByIdValidator, updateProductValidator } from '../../shared/middlewares/product-validator.middleware';
+import {
+  createProductValidator,
+  getProductByIdValidator,
+  updateProductValidator,
+} from '../../shared/middlewares/product-validator.middleware';
+import { ErrorMessages } from '../../shared/enums/messages/error-messages.enum';
+import { SuccessMessages } from '../../shared/enums/messages/success-messages.enum';
 
 const controller = Router();
 
@@ -11,8 +17,8 @@ controller
     try {
       const newProduct = await useTypeORM(ProductEntity).save(req.body);
       res.status(201).send(newProduct);
-    } catch(e: unknown) {
-      res.status(500).send({ message: 'Unable to save entry to DB!' })
+    } catch (e: unknown) {
+      res.status(500).send({ message: ErrorMessages.CreateFail });
     }
   })
 
@@ -20,66 +26,84 @@ controller
     try {
       const products = await useTypeORM(ProductEntity).find();
       res.send(products);
-    } catch(e: unknown) {
-      res.status(500).send({ message: 'Unable to retrieve data from DB!' })
+    } catch (e: unknown) {
+      res.status(500).send({ message: ErrorMessages.GetFail });
     }
   })
 
-  .get('/:id',getProductByIdValidator, async (req: Request, res: Response) => {
+  .get('/:id', getProductByIdValidator, async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
 
       const existingProduct = await useTypeORM(ProductEntity).findOneBy({ id });
 
       if (!existingProduct) {
-        return res.status(404).send({ message: `Product with id: ${id} was not found.` });
+        return res
+          .status(404)
+          .send({ message: `Product with id: ${id} was not found.` });
       }
 
       res.send(existingProduct);
-
     } catch (e: unknown) {
-      res.status(500).send({ message: 'Unable to retrieve data from DB!' })
+      res.status(500).send({ message: ErrorMessages.GetFail });
     }
   })
 
-  .patch('/:id', getProductByIdValidator, updateProductValidator, async (req: Request, res: Response) => {
-    try {
-      const { id } = req.params;
+  .patch(
+    '/:id',
+    getProductByIdValidator,
+    updateProductValidator,
+    async (req: Request, res: Response) => {
+      try {
+        const { id } = req.params;
 
-      const existingProduct = await useTypeORM(ProductEntity).findOneBy({ id });
+        const existingProduct = await useTypeORM(ProductEntity).findOneBy({
+          id,
+        });
 
-      if (!existingProduct) {
-        return res.status(404).send({ message: `Product with id: ${id} was not found.` });
+        if (!existingProduct) {
+          return res
+            .status(404)
+            .send({ message: `Product with id: ${id} was not found.` });
+        }
+
+        const changes: Partial<ProductEntity> = req.body;
+        const productChanges = { ...existingProduct, ...changes };
+
+        const updatedProduct = await useTypeORM(ProductEntity).save(
+          productChanges
+        );
+
+        res.send(updatedProduct);
+      } catch (e: unknown) {
+        res.status(500).send({ message: ErrorMessages.UpdateFail });
       }
-
-      const changes: Partial<ProductEntity> = req.body;
-      const productChanges = { ...existingProduct, ...changes };
-
-      const updatedProduct = await useTypeORM(ProductEntity)
-        .save(productChanges);
-
-      res.send(updatedProduct);
-
-    } catch(e: unknown) {
-      res.status(500).send({ message: 'Unable to update entry in DB!' })
     }
-  })
+  )
 
-  .delete('/:id', getProductByIdValidator, async (req: Request, res: Response) => {
-    try {
-      const { id } = req.params;
+  .delete(
+    '/:id',
+    getProductByIdValidator,
+    async (req: Request, res: Response) => {
+      try {
+        const { id } = req.params;
 
-      const existingProduct = await useTypeORM(ProductEntity).findOneBy({ id });
+        const existingProduct = await useTypeORM(ProductEntity).findOneBy({
+          id,
+        });
 
-      if (!existingProduct) {
-        return res.status(404).send({ message: `Product with id: ${id} was not found.` });
+        if (!existingProduct) {
+          return res
+            .status(404)
+            .send({ message: `Product with id: ${id} was not found.` });
+        }
+
+        await useTypeORM(ProductEntity).remove(existingProduct);
+        res.send({ message: SuccessMessages.ProductRemoveSuccess });
+      } catch (e: unknown) {
+        res.status(500).send({ message: ErrorMessages.DeleteFail });
       }
-
-      await useTypeORM(ProductEntity).remove(existingProduct);
-      res.send({ message: 'Product removed!' });
-    } catch(e: unknown) {
-      res.status(500).send({ message: 'Unable to delete entry from DB!' })
     }
-  })
+  );
 
 export default controller;

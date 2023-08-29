@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { ErrorMessages } from '../enums/messages/error-messages.enum';
 
 export const createUserValidationSchema = Joi.object({
   username: Joi.string().alphanum().min(3).max(30).required(),
@@ -6,7 +7,7 @@ export const createUserValidationSchema = Joi.object({
   password: Joi.string()/*.pattern(new RegExp('...'))*/.required(),
 
   repeat_password: Joi.any().valid(Joi.ref('password')).required().messages({
-    'any.only' : 'Passwords must match'
+    'any.only' : ErrorMessages.PasswordMismatchFail
   }),
 
   email: Joi.string().email({
@@ -33,7 +34,7 @@ export const changePasswordValidationSchema = Joi.object({
   new_password: Joi.string().required(),
 
   repeat_password: Joi.any().valid(Joi.ref('new_password')).required().messages({
-    'any.only' : 'Passwords must match'
+    'any.only' : ErrorMessages.PasswordMismatchFail
   })
 });
 

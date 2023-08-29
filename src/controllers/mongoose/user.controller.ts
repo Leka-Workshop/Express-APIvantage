@@ -1,7 +1,12 @@
 import { Router, Request, Response } from 'express';
 import { IUser } from '../../databases/mongodb/model/user.model';
 import UserModel from '../../databases/mongodb/schema/user.schema';
+import {
+  MongooseErrorCodes,
+  MongooseErrors,
+} from '../../shared/enums/db/mongodb-errors.enum';
 import { ErrorMessages } from '../../shared/enums/messages/error-messages.enum';
+import { SuccessMessages } from '../../shared/enums/messages/success-messages.enum';
 import {
   changePasswordValidator,
   createUserValidator,
@@ -21,13 +26,17 @@ controller
       newUser.password = req.body.password;
 
       await newUser.save();
-    } catch(e: any) {
-
+    } catch (e: any) {
       // If unique mongoose constraint (for username or email) is violated
-      if (e.name === 'MongoServerError' && e.code === 11000) {
-        return res.status(422).send({ message: 'User already exists!' });
+      if (
+        e.name === MongooseErrors.MongoServerError &&
+        e.code === MongooseErrorCodes.UniqueConstraintFail
+      ) {
+        return res
+          .status(422)
+          .send({ message: ErrorMessages.DuplicateEntryFail });
       }
-      res.status(500).send({ message: ErrorMessages.CreateFail })
+      res.status(500).send({ message: ErrorMessages.CreateFail });
     }
   })
 
@@ -36,9 +45,9 @@ controller
       const users = await UserModel.find({});
       // httpLogger.info('Gonna send data!', { data: users })
       res.send(users);
-    } catch(e: unknown) {
+    } catch (e: unknown) {
       // httpLogger.error('Something went wrong');
-      res.status(500).send({ message: 'Unable to retrieve data from DB!' })
+      res.status(500).send({ message: ErrorMessages.GetFail });
     }
   })
 
@@ -55,34 +64,39 @@ controller
       }
 
       res.send(existingUser);
-    } catch(e: unknown) {
-      res.status(500).send({ message: 'Unable to retrieve data from DB!' })
+    } catch (e: unknown) {
+      res.status(500).send({ message: ErrorMessages.GetFail });
     }
   })
 
-  .patch('/:id', getUserByIdValidator, updateUserValidator, async (req, res) => {
-    try {
-      const { id } = req.params;
+  .patch(
+    '/:id',
+    getUserByIdValidator,
+    updateUserValidator,
+    async (req, res) => {
+      try {
+        const { id } = req.params;
 
-      const changes: Partial<IUser> = req.body;
+        const changes: Partial<IUser> = req.body;
 
-      const updatedUser = await UserModel.findOneAndUpdate(
-        { _id: id },
-        { $set: { ...changes } },
-        { new: true }
-      );
+        const updatedUser = await UserModel.findOneAndUpdate(
+          { _id: id },
+          { $set: { ...changes } },
+          { new: true }
+        );
 
-      if (!updatedUser) {
-        return res
-          .status(404)
-          .send({ message: `User with id: ${id} was not found.` });
+        if (!updatedUser) {
+          return res
+            .status(404)
+            .send({ message: `User with id: ${id} was not found.` });
+        }
+
+        res.send(updatedUser);
+      } catch (e: unknown) {
+        res.status(500).send({ message: ErrorMessages.UpdateFail });
       }
-
-      res.send(updatedUser);
-    } catch(e: unknown) {
-      res.status(500).send({ message: 'Unable to update data in DB!' })
     }
-  })
+  )
 
   .patch(
     '/change-password/:id',
@@ -105,8 +119,8 @@ controller
         }
 
         res.send(updatedUser);
-      } catch(e: unknown) {
-        res.status(500).send({ message: 'Unable to update data in DB!' })
+      } catch (e: unknown) {
+        res.status(500).send({ message: ErrorMessages.UpdateFail });
       }
     }
   )
@@ -125,10 +139,9 @@ controller
 
       await UserModel.findOneAndRemove({ _id: id });
 
-      res.send({ message: 'User removed!' });
-
-    } catch(e: unknown) {
-      res.status(500).send({ message: 'Unable to delete entry from DB!' })
+      res.send({ message: SuccessMessages.UserRemoveSuccess });
+    } catch (e: unknown) {
+      res.status(500).send({ message: ErrorMessages.DeleteFail });
     }
   });
 

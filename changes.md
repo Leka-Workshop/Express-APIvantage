@@ -2,6 +2,15 @@
 
 This file is created to easily track project updates from one version to another.
 
+
+### V1.2: Logging
+
+* Added Logging service to store logs in the console, file or the database using the [Winston package](https://www.npmjs.com/package/winston)
+* Added response interceptor middleware that is triggered on every response sent to the client and calls the logger
+* Added redact logger helper that replaces sensitive values with asterisk
+* Moved response messages to Enums (Info/Success/Special/Error-messages.enum.ts)
+* Moved common HTTP verbs & Error codes to Enums
+
 ### V1.1: API Validations
 
 * Changed environment variable `APP_PORT` to `PORT` (Default Node.js env variable) in `init.ts`

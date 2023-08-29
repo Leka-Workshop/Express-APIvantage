@@ -1,9 +1,8 @@
 import winston from 'winston';
-import { LogIndentation } from '../shared/enums/logger/log-indentation.enum';
-import { randomBytes } from 'crypto';
 import 'winston-mongodb';
 import  DailyRotateFile from 'winston-daily-rotate-file';
-
+import { randomBytes } from 'crypto';
+import { LogIndentation } from '../shared/enums/logger/log-indentation.enum';
 
 const { combine, timestamp, colorize, json, label, printf, metadata } =
   winston.format;
@@ -25,7 +24,7 @@ export const httpLogger = winston.createLogger({
         timestamp,
         appInfo: {
           appVersion,
-          environment: process.env.NODE_ENV,
+          environment: process.env.NODE_ENV, // development/staging/production
           proccessId: process.pid,
         },
         message,
@@ -37,14 +36,17 @@ export const httpLogger = winston.createLogger({
   ),
   transports: [
     // log to console
-    new winston.transports.Console(),
+    new winston.transports.Console({
+      // if set to true, logs will not appear
+      silent: false // or silent: process.env.NODE_ENV !== 'development'
+    }),
     // log to file
     new winston.transports.File({
       filename: 'logs/application-logs.log',
     }),
     // log to file, but rotate daily
     new DailyRotateFile({
-      filename: 'logs/rotating-logs-%DATE%.log',
+      filename: 'logs/rotating-logs-%DATE%.log', // file name includes current date
       datePattern: 'MMMM-DD-YYYY',
       zippedArchive: false, // zip logs true/false
       maxSize: '20m', // rotate if file size exceeds 20 MB

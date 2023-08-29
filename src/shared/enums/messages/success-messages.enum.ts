@@ -3,5 +3,7 @@ export enum SuccessMessages {
   GetSuccess = 'Resource retrieved successfully',
   UpdateSuccess = 'Resource updated successfully',
   DeleteSuccess = 'Resource deleted successfully',
-  GenericSuccess = 'Operation completed successfully'
+  GenericSuccess = 'Operation completed successfully',
+  UserRemoveSuccess = 'User removed!',
+  ProductRemoveSuccess = 'Product removed!'
 }

@@ -12,7 +12,7 @@ const responseInterceptor = (
   next: NextFunction
 ) => {
   // used to calculate time between request and the response
-  // req.requestStartTime = Date.now();
+  const requestStartTime = Date.now();
 
   // Save the original response method
   const originalSend = res.send;
@@ -27,22 +27,22 @@ const responseInterceptor = (
       if (res.statusCode < 400) {
         httpLogger.info(
           getResponseMessage(req.method),
-          formatHTTPLoggerResponse(req, res, body)
+          formatHTTPLoggerResponse(req, res, body, null, requestStartTime)
         );
 
         httpLoggerDB.info(
           getResponseMessage(req.method),
-          formatHTTPLoggerResponse(req, res, body)
+          formatHTTPLoggerResponse(req, res, body, null, requestStartTime)
         );
       } else {
         httpLogger.error(
           body.message,
-          formatHTTPLoggerResponse(req, res, body)
+          formatHTTPLoggerResponse(req, res, body, null, requestStartTime)
         );
 
         httpLoggerDB.error(
           body.message,
-          formatHTTPLoggerResponse(req, res, body)
+          formatHTTPLoggerResponse(req, res, body, null, requestStartTime)
         );
       }
 

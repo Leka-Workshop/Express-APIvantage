@@ -118,7 +118,7 @@
 
 ```json
 {
-  "message": "Passwords must match"
+  "message": "Passwords must match!"
 }
 ```
 
@@ -432,7 +432,7 @@ A password can only be updated via [change-password](#change-user-password) rout
 
 ```json
 {
-  "message": "Passwords must match"
+  "message": "Passwords must match!"
 }
 ```
 
