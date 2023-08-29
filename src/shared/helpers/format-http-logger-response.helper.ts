@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { HTTPHeaders } from '../enums/http/http-headers.enum';
-import IHTTPError from '../models/http-error';
 import IHTTPLoggerResponseData from '../models/http-logger-response-data.interface';
 import redactLogData from './redact-logger.helper';
 
@@ -9,7 +8,6 @@ const formatHTTPLoggerResponse = (
   req: Request,
   res: Response,
   responseBody: any,
-  exception?: IHTTPError | null,
   requestStartTime?: number
 ): IHTTPLoggerResponseData => {
   let responseTimeInMS = '.';
@@ -34,18 +32,10 @@ const formatHTTPLoggerResponse = (
     },
     response: {
       headers: res.getHeaders(),
-      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-      statusCode: exception?.statusCode || res.statusCode,
+      statusCode: res.statusCode,
       responseTime: responseTimeInMS,
       body: redactLogData(responseBody),
-    },
-    error: exception
-      ? {
-          statusCode: exception.statusCode,
-          message: exception.message,
-          stackTrace: exception.stack,
-        }
-      : {},
+    }
   };
 };
 

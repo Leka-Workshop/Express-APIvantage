@@ -27,22 +27,22 @@ const responseInterceptor = (
       if (res.statusCode < 400) {
         httpLogger.info(
           getResponseMessage(req.method),
-          formatHTTPLoggerResponse(req, res, body, null, requestStartTime)
+          formatHTTPLoggerResponse(req, res, body, requestStartTime)
         );
 
         httpLoggerDB.info(
           getResponseMessage(req.method),
-          formatHTTPLoggerResponse(req, res, body, null, requestStartTime)
+          formatHTTPLoggerResponse(req, res, body, requestStartTime)
         );
       } else {
         httpLogger.error(
           body.message,
-          formatHTTPLoggerResponse(req, res, body, null, requestStartTime)
+          formatHTTPLoggerResponse(req, res, body, requestStartTime)
         );
 
         httpLoggerDB.error(
           body.message,
-          formatHTTPLoggerResponse(req, res, body, null, requestStartTime)
+          formatHTTPLoggerResponse(req, res, body, requestStartTime)
         );
       }
 
