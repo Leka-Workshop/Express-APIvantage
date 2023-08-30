@@ -10,11 +10,11 @@ const formatHTTPLoggerResponse = (
   responseBody: any,
   requestStartTime?: number
 ): IHTTPLoggerResponseData => {
-  let responseTimeInMS = '.';
+  let requestDurationInMs = '.';
 
   if (requestStartTime) {
     const endTime = Date.now() - requestStartTime;
-    responseTimeInMS = `${endTime / 1000}s`; // ms to s
+    requestDurationInMs = `${endTime / 1000}s`; // ms to s
   }
 
   return {
@@ -33,7 +33,7 @@ const formatHTTPLoggerResponse = (
     response: {
       headers: res.getHeaders(),
       statusCode: res.statusCode,
-      responseTime: responseTimeInMS,
+      requestDurationInMs,
       body: redactLogData(responseBody),
     }
   };

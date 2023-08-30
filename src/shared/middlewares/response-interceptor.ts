@@ -23,6 +23,7 @@ const responseInterceptor = (
   // Override the response method
   res.send = function (body: any): Response {
     // Log the response body or any other data you want to track
+    // responseSent is used to block the same request from been sent twice
     if (!responseSent) {
       if (res.statusCode < 400) {
         httpLogger.info(

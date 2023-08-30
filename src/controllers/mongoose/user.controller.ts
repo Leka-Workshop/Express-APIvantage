@@ -43,10 +43,8 @@ controller
   .get('/', async (req: Request, res: Response) => {
     try {
       const users = await UserModel.find({});
-      // httpLogger.info('Gonna send data!', { data: users })
       res.send(users);
     } catch (e: unknown) {
-      // httpLogger.error('Something went wrong');
       res.status(500).send({ message: ErrorMessages.GetFail });
     }
   })

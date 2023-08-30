@@ -38,7 +38,7 @@ export const httpLogger = winston.createLogger({
     // log to console
     new winston.transports.Console({
       // if set to true, logs will not appear
-      silent: false // or silent: process.env.NODE_ENV !== 'development'
+      silent: process.env.NODE_ENV === 'test_env' // true/false
     }),
     // log to file
     new winston.transports.File({
