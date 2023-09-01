@@ -18,6 +18,6 @@ interface IHTTPLoggerRequest {
 interface IHTTPLoggerResponse {
   headers: any;
   statusCode: number;
-  requestDurationInMs: string;
+  requestDuration: string;
   body: any;
 }

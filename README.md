@@ -21,3 +21,4 @@ Express.js starter app with TypeScript, SQL and MongoDB.
 Read Full Blog on Medium:
 * [How to set up starter project](https://mirzaleka.medium.com/express-js-starter-api-with-typescript-deef5c4b6b70)
 * [How to validate APIs](https://mirzaleka.medium.com/api-validations-in-express-js-5d1d308dceea)
+* [Automated Logging in Express.js](https://medium.com/@mirzaleka/automated-logging-in-express-js-a1f85ca6c5cd)
