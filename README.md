@@ -17,11 +17,12 @@ It's hard to find a good project online that fits your needs and at the same tim
 This project aims to achieve all that. From starter tools to a production-ready product, we'll learn how to build a unified solution that can be easily extensible with new features. With each new chapter, we'll improve upon the previous codebase.
 
 ### Branches:
-
 * [1-Starter-API](https://github.com/Leka-Workshop/Express-APIvantage/tree/1-Starter-API)
 * [2-API-Validations](https://github.com/Leka-Workshop/Express-APIvantage/tree/2-API-Validations)
+* [3-Logging](https://github.com/Leka-Workshop/Express-APIvantage/tree/3-Logging)
 
 ### Blogs:
 * [How to set up starter project](https://mirzaleka.medium.com/express-js-starter-api-with-typescript-deef5c4b6b70)
 * [How to validate APIs](https://mirzaleka.medium.com/api-validations-in-express-js-5d1d308dceea)
+* [Automated Logging in Express.js](https://medium.com/@mirzaleka/automated-logging-in-express-js-a1f85ca6c5cd)
 
