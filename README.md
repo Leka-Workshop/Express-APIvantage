@@ -2,7 +2,40 @@
 
 Express.js starter app with TypeScript, SQL and MongoDB.
 
-### Get Started
+## Topic of this lesson
+We'll learn how to set up a project from scratch.
+
+* Initialize NPM repository
+* Add TypeScript
+* ESLint
+* Autoreload with Nodemon
+* Pair of databases (SQL & MongoDB)
+* Controllers
+* Separate features into modules
+* Wire everything together
+
+👉 [Read Full Blog on how to set up starter project](https://mirzaleka.medium.com/express-js-starter-api-with-typescript-deef5c4b6b70)
+
+## Folder Structure
+
+```
+📁 database-setup
+📁 postman
+📁 src 
+|__ 📁 controllers
+|_____ 📁 mongoose
+|_____ 📁 typeorm
+|__ 📁 databases
+|_____ 📁 mongodb
+|________ 📁 model
+|________ 📁 schema
+|_____ 📁 postgresql
+|________ 📁 entity
+|________ 📁 model
+|__ 📁 startup 
+```
+
+## Get Started
 
 * Clone repository
 * Switch to branch **1-Starter-API** (if you're not on it already)
@@ -14,15 +47,11 @@ Express.js starter app with TypeScript, SQL and MongoDB.
 * Start in production mode `npm start`
 * Have fun!
 
-**Built with:**
+### Built with:
 * Node.js: v18.2.0
 * NPM: v8.6.0
 
-### Branches:
+## Other Branches
 
-* [1-Starter-API](https://github.com/Leka-Workshop/Express-APIvantage/tree/1-Starter-API)
-* [2-API-Validations](https://github.com/Leka-Workshop/Express-APIvantage/tree/2-API-Validations)
-
-### Blogs:
-* [How to set up starter project](https://mirzaleka.medium.com/express-js-starter-api-with-typescript-deef5c4b6b70)
-* [How to validate APIs](https://mirzaleka.medium.com/api-validations-in-express-js-5d1d308dceea)
+* [API Validations](https://github.com/Leka-Workshop/Express-APIvantage/tree/2-API-Validations)
+* [Automated Logging](https://github.com/Leka-Workshop/Express-APIvantage/tree/3-Logging)
