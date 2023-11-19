@@ -2,7 +2,7 @@ import winston from 'winston';
 import 'winston-mongodb';
 import  DailyRotateFile from 'winston-daily-rotate-file';
 import { randomBytes } from 'crypto';
-import { LogIndentation } from '../shared/enums/logger/log-indentation.enum';
+import { LogIndentation } from '../enum/log-indentation.enum';
 
 const { combine, timestamp, colorize, json, label, printf, metadata } =
   winston.format;

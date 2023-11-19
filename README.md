@@ -5,12 +5,12 @@ Express.js starter app with TypeScript, SQL and MongoDB.
 ### Get Started
 
 * Clone repository
-* Switch to branch **3-Logging**
+* Switch to branch **4-error-handling**
 * Install dependencies `npm i`
 * Create .env file
-* Paste database connections (Find out how in [database-setup.md](https://github.com/Leka-Workshop/Express-APIvantage/blob/3-Logging/docs/database-setup/database-setup.md))
+* Paste database connections (Find out how in [database-setup.md](https://github.com/Leka-Workshop/Express-APIvantage/blob/4-error-handling/docs/database-setup/database-setup.md))
 * Start in development mode `npm run dev`
-* Look for [postman](https://github.com/Leka-Workshop/Express-APIvantage/blob/3-Logging/docs/postman) directory and routes to play around with
+* Look for [postman](https://github.com/Leka-Workshop/Express-APIvantage/blob/4-error-handling/docs/postman) directory and routes to play around with
 * Start in production mode `npm start`
 * Have fun!
 
@@ -18,7 +18,8 @@ Express.js starter app with TypeScript, SQL and MongoDB.
 * Node.js: v18.2.0
 * NPM: v8.6.0
 
-Read Full Blog on Medium:
+Read Full Series on Medium:
 * [How to set up starter project](https://mirzaleka.medium.com/express-js-starter-api-with-typescript-deef5c4b6b70)
 * [How to validate APIs](https://mirzaleka.medium.com/api-validations-in-express-js-5d1d308dceea)
-* [Automated Logging in Express.js](https://medium.com/@mirzaleka/automated-logging-in-express-js-a1f85ca6c5cd)
+* [Automated Logging in Express.js](https://mirzaleka.medium.com/automated-logging-in-express-js-a1f85ca6c5cd)
+* [Global Exception Handling]()

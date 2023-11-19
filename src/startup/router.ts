@@ -2,6 +2,8 @@ import { Express, Request, Response } from 'express';
 import mongooseUsersRouter from '../controllers/mongoose/user.controller';
 import typeormProductsRouter from '../controllers/typeorm/product.controller';
 import responseInterceptor from '../shared/middlewares/response-interceptor';
+import { exceptionHandler } from '../shared/middlewares/exception-handling.middleware';
+import { pageNotFoundExceptionHandler } from '../shared/middlewares/page-not-found-exception-handler.middleware';
 
 const routerSetup = (app: Express) =>
   app
@@ -15,5 +17,11 @@ const routerSetup = (app: Express) =>
     .use(responseInterceptor)
     .use('/api/mongoose/users', mongooseUsersRouter)
     .use('/api/typeorm/products', typeormProductsRouter)
+
+    // asterisk handles all type of requests on all routes except the ones above
+    .use('*', pageNotFoundExceptionHandler)
+
+    // The exception handling middleware is the last one in the pipeline
+    .use(exceptionHandler)
 
 export default routerSetup;

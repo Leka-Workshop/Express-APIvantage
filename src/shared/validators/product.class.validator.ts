@@ -11,7 +11,12 @@ import {
 } from 'class-validator';
 import { IProduct } from '../../databases/postgresql/model/product.model';
 
-export class CreateProductValidationSchema implements IProduct {
+/**
+ * Base Class for Product validation
+ */
+export class BaseProductValidationSchema { }
+
+export class CreateProductValidationSchema extends BaseProductValidationSchema implements IProduct {
   @Length(3, 50)
   @IsNotEmpty()
   name!: string;
@@ -44,7 +49,7 @@ export class UpdateProductValidationSchema
   name!: string;
 }
 
-export class GetProductIdValidationSchema {
+export class GetProductIdValidationSchema extends BaseProductValidationSchema {
   @IsInt()
   @Min(1)
   id!: number

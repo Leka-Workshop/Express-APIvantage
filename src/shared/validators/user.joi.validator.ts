@@ -40,5 +40,5 @@ export const changePasswordValidationSchema = Joi.object({
 
 // MongoDB Object_ID Validator
 export const getUserIdValidationSchema = Joi.object({
-  id: Joi.string().hex().length(24)
+  id: Joi.string().hex().length(24) // mongodb id length
 });

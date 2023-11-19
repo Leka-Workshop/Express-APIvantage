@@ -1,5 +1,5 @@
-import { SensitiveKeys } from '../enums/logger/sensitive-keys.enum';
-import { SpecialMessages } from '../enums/messages/special-messages.enum';
+import { SensitiveKeys } from '../enum/sensitive-keys.enum';
+import { SpecialMessages } from '../../../shared/enums/messages/special-messages.enum';
 
 const sensitiveKeysList = Object.values(SensitiveKeys) as string[];
 
