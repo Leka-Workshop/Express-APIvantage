@@ -3,7 +3,7 @@ import { httpLoggerService } from '../../services/logger/http-logger.service';
 import { ErrorMessages } from '../enums/messages/error-messages.enum';
 import { HTTPMessages } from '../models/constants/http-messages';
 
-export const startupExceptionHandler = (error: unknown) => {
+export const exceptionLogWrapper = (error: unknown) => {
   const err = error as Error;
   cliLoggerService.error('Server startup failed! ❌');
   httpLoggerService.error(
