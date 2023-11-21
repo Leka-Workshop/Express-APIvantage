@@ -17,7 +17,7 @@ controller
   .post(
     '/',
     createUserValidator,
-    asyncHandler(async (req, res) => {
+    asyncHandler(async (req: Request, res: Response) => {
       const newUser = await userService.createNewUser(req.body);
       res.status(201).send(newUser);
     })
