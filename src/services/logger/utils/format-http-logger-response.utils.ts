@@ -20,7 +20,7 @@ const formatHTTPLoggerResponse = (context: IHTTPLogMetaData): IHTTPLoggerRespons
       baseUrl: context?.req?.baseUrl as string,
       url: context?.req?.url as string,
       method: context?.req?.method as string,
-      body: context?.req?.body,
+      body: redactLogData(context?.req?.body),
       params: context?.req?.params,
       query: context?.req?.query,
       clientIp:

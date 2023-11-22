@@ -6,5 +6,6 @@ export const pageNotFoundExceptionHandler = (
   _res: Response,
   _next: NextFunction
 ) => {
+  // this error will be handled by exception-handling middleware
   throw new NotFoundException('Page not found!');
 };

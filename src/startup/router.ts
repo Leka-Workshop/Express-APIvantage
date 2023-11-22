@@ -18,7 +18,8 @@ const routerSetup = (app: Express) =>
     .use('/api/mongoose/users', mongooseUsersRouter)
     .use('/api/typeorm/products', typeormProductsRouter)
 
-    // asterisk handles all type of requests on all routes except the ones above
+    // asterisk handles all request paths, but because the order maters,
+    // it will ignore route paths that came before
     .use('*', pageNotFoundExceptionHandler)
 
     // The exception handling middleware is the last one in the pipeline
