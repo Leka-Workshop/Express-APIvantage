@@ -22,4 +22,4 @@ Read Full Series on Medium:
 * [How to set up starter project](https://mirzaleka.medium.com/express-js-starter-api-with-typescript-deef5c4b6b70)
 * [How to validate APIs](https://mirzaleka.medium.com/api-validations-in-express-js-5d1d308dceea)
 * [Automated Logging in Express.js](https://mirzaleka.medium.com/automated-logging-in-express-js-a1f85ca6c5cd)
-* [Global Exception Handling]()
+* [Global Exception Handling](https://mirzaleka.medium.com/build-a-global-exception-handler-using-express-js-typescript-b9bb2f521e5e)
