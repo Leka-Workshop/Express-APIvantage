@@ -20,9 +20,10 @@ This project aims to achieve all that. From starter tools to a production-ready 
 * [1-Starter-API](https://github.com/Leka-Workshop/Express-APIvantage/tree/1-Starter-API)
 * [2-API-Validations](https://github.com/Leka-Workshop/Express-APIvantage/tree/2-API-Validations)
 * [3-Logging](https://github.com/Leka-Workshop/Express-APIvantage/tree/3-Logging)
+* [4-Error-Handling](https://github.com/Leka-Workshop/Express-APIvantage/tree/4-error-handling)
 
 ### Blogs:
 * [How to set up starter project](https://mirzaleka.medium.com/express-js-starter-api-with-typescript-deef5c4b6b70)
 * [How to validate APIs](https://mirzaleka.medium.com/api-validations-in-express-js-5d1d308dceea)
 * [Automated Logging in Express.js](https://medium.com/@mirzaleka/automated-logging-in-express-js-a1f85ca6c5cd)
-
+* [Build a Global Exception Handler](https://mirzaleka.medium.com/build-a-global-exception-handler-using-express-js-typescript-b9bb2f521e5e)
